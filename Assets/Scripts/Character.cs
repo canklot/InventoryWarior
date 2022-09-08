@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
     private CharacterController _characterController;
     private Animator _animator;
+    private float _moveSpeed = 4f;
     private int _isWalkingHash;
+    [SerializeField] private RoadManager RoadManagerComp;
+
 
     void Awake()
     {
         _characterController = gameObject.GetComponent<CharacterController>();
         _animator = gameObject.GetComponent<Animator>();
-        _isWalkingHash = Animator.StringToHash("isWalking");
 
     }
 
@@ -28,14 +31,17 @@ public class Character : MonoBehaviour
         {
             print("D key was pressed");
         }
-        _characterController.Move(Vector3.forward * Time.deltaTime);
+        _characterController.Move(Vector3.forward * _moveSpeed * Time.deltaTime);
 
     }
 
     void handleAnimation()
     {
-        bool isWalking = _animator.GetBool(_isWalkingHash);
 
-        //_animator.SetBool("isWalking", true);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        RoadManagerComp.MoveRoad();
+    }
+
 }
