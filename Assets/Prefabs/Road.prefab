@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7427702996249722275}
   m_Layer: 0
   m_Name: RoadSpawnTrigger
-  m_TagString: Untagged
+  m_TagString: RoadSpawnTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

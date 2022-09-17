@@ -39,9 +39,13 @@ public class Character : MonoBehaviour
     {
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider otherCollider)
     {
-        RoadManagerComp.MoveRoad();
+        if (otherCollider.CompareTag("RoadSpawnTrigger"))
+        {
+            RoadManagerComp.MoveRoad();
+        }
+
     }
 
 }
