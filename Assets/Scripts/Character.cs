@@ -8,7 +8,9 @@ public class Character : MonoBehaviour
     private CharacterController _characterController;
     private Animator _animator;
     private float _moveSpeed = 4f;
-    private int _isWalkingHash;
+    private bool _isWalking = true;
+    private bool _isAttacking = false;
+
     [SerializeField] private RoadManager RoadManagerComp;
 
 
@@ -27,11 +29,11 @@ public class Character : MonoBehaviour
 
     void Move()
     {
-        if (Input.GetKey("d"))
+        if (_isWalking)
         {
-            print("D key was pressed");
+            _characterController.Move(Vector3.forward * _moveSpeed * Time.deltaTime);
         }
-        _characterController.Move(Vector3.forward * _moveSpeed * Time.deltaTime);
+
 
     }
 
@@ -44,6 +46,19 @@ public class Character : MonoBehaviour
         if (otherCollider.CompareTag("RoadSpawnTrigger"))
         {
             RoadManagerComp.MoveRoad();
+        }
+
+    }
+
+    void OnTriggerEnter(Collider otherCollider)
+    {
+        if (otherCollider.gameObject.name == "AttackTrigger")
+        {
+            Debug.Log("Attack");
+            _isAttacking = true;
+            _isWalking = false;
+            _animator.SetBool("isAttacking", true);
+
         }
 
     }
