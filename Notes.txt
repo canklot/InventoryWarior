@@ -1,0 +1,3 @@
+collided.CompateTag("mytag") vs otherCollider.gameObject.name == "AttackTrigger"
+
+Hashing names and tas
