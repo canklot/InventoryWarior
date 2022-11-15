@@ -4,17 +4,36 @@ using UnityEngine;
 
 public class attack : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int maxHp = 100;
+    public int currentHp;
+    public HeathBarClass enemyHealthBar;
+
     void Start()
     {
-
+        currentHp = maxHp;
+        enemyHealthBar.SetHealth(maxHp);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
     }
-    //Detect collisions between the GameObjects with Colliders attached
+
+    void OnTriggerStay(Collider otherCollider)
+    {
+        if (otherCollider.CompareTag("Player"))
+        {
+            TakeDamage(1);
+        }
+
+    }
+
+    void TakeDamage(int damage)
+    {
+        Debug.Log("TakeDamage");
+        currentHp -= damage;
+        enemyHealthBar.SetHealth(currentHp);
+    }
 
 }

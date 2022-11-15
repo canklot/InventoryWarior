@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     private Animator _animator;
     private float _moveSpeed = 4f;
     private bool _isWalking = true;
-    private bool _isAttacking = false;
+    //private bool _isAttacking = false;
 
     [SerializeField] private RoadManager RoadManagerComp;
 
@@ -55,7 +55,7 @@ public class Character : MonoBehaviour
         if (otherCollider.gameObject.name == "AttackTrigger")
         {
             Debug.Log("Attack");
-            _isAttacking = true;
+            //_isAttacking = true;
             _isWalking = false;
             _animator.SetBool("isAttacking", true);
 
