@@ -31,7 +31,6 @@ public class attack : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        Debug.Log("TakeDamage");
         currentHp -= damage;
         enemyHealthBar.SetHealth(currentHp);
     }
