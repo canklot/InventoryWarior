@@ -13,7 +13,6 @@ public class Attack : MonoBehaviour
         Debug.Log("OnTriggerStay");
         if (otherCollider.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy");
             HeathBarClass otherHealthBar = otherCollider.GetComponent<HeathBarClass>();
             otherHealthBar.TakeDamage(1);
         }

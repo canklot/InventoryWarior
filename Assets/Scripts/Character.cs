@@ -23,7 +23,6 @@ public class Character : MonoBehaviour
     void Update()
     {
         Move();
-        handleAnimation();
     }
 
     void Move()
@@ -33,8 +32,6 @@ public class Character : MonoBehaviour
             _characterController.Move(Vector3.forward * _moveSpeed * Time.deltaTime);
         }
     }
-
-    void handleAnimation() { }
 
     private void OnTriggerExit(Collider otherCollider)
     {

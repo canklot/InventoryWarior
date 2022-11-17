@@ -10,8 +10,19 @@ public class HeathBarClass : MonoBehaviour
     public Image fill;
     public int maxHp = 100;
     public int currentHp;
+    private Animator _animator;
 
-    public void SetMaxHealth(int maxhp)
+    void Awake()
+    {
+        _animator = gameObject.GetComponent<Animator>();
+    }
+
+    void Start()
+    {
+        currentHp = maxHp;
+    }
+
+    void SetMaxHealth(int maxhp)
     {
         HealthSlider.maxValue = maxhp;
         // Start the game with max hp
@@ -20,7 +31,7 @@ public class HeathBarClass : MonoBehaviour
         fill.color = HealthGradient.Evaluate(1f);
     }
 
-    public void SetHealth(int hp)
+    void SetHealth(int hp)
     {
         HealthSlider.value = hp;
         // Change the health bar color
@@ -31,5 +42,14 @@ public class HeathBarClass : MonoBehaviour
     {
         currentHp -= damage;
         SetHealth(currentHp);
+        CheckDead();
+    }
+
+    void CheckDead()
+    {
+        if (currentHp == 0)
+        {
+            _animator.SetBool("isDead", true);
+        }
     }
 }
