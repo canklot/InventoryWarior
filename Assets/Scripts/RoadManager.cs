@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class RoadManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> roads;
+    [SerializeField]
+    private List<GameObject> roads;
     private float Offset = 50f;
-    void Start()
-    {
 
-    }
+    void Start() { }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     public void MoveRoad()
     {
@@ -25,5 +21,4 @@ public class RoadManager : MonoBehaviour
         TheRoad.transform.position = new Vector3(0, 0, newZ);
         roads.Add(TheRoad);
     }
-
 }

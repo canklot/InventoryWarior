@@ -47,7 +47,6 @@ public class HeathBarClass : MonoBehaviour
 
     void DeadAnimComplete()
     {
-        Debug.Log("Animation over");
         Destroy(gameObject);
     }
 

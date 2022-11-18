@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     //private bool _isAttacking = false;
 
     [SerializeField]
-    private RoadManager RoadManagerComp;
+    private RoadManager RoadManagerObject;
 
     void Awake()
     {
@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
     {
         if (otherCollider.CompareTag("RoadSpawnTrigger"))
         {
-            RoadManagerComp.MoveRoad();
+            RoadManagerObject.MoveRoad();
         }
     }
 

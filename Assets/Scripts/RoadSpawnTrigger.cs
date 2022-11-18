@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class RoadSpawnTrigger : MonoBehaviour
 {
-    RoadManager RoadManagerComp;
+    RoadManager RoadManagerComponent;
+    EnemyManager EnemyManagerComponent;
+
     void Start()
     {
-        RoadManagerComp = GetComponent<RoadManager>();
+        RoadManagerComponent = GetComponent<RoadManager>();
+        EnemyManagerComponent = GetComponent<EnemyManager>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() { }
 
-    }
     public void SpawnTriggerEntered()
     {
-        RoadManagerComp.MoveRoad();
+        Debug.Log("SpawnTriggerEntered");
+        RoadManagerComponent.MoveRoad();
+        EnemyManagerComponent.SpawnEnemy();
     }
 }

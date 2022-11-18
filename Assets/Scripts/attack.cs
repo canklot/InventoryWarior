@@ -10,7 +10,6 @@ public class Attack : MonoBehaviour
 
     void OnTriggerStay(Collider otherCollider)
     {
-        Debug.Log("OnTriggerStay");
         if (otherCollider.CompareTag("Enemy"))
         {
             HeathBarClass otherHealthBar = otherCollider.GetComponent<HeathBarClass>();
