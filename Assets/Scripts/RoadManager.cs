@@ -6,7 +6,7 @@ public class RoadManager : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> roads;
-    private float Offset = 50f;
+    private float Offset = 30f; //make this road z
 
     void Start() { }
 
