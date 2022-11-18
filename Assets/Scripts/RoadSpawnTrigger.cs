@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class RoadSpawnTrigger : MonoBehaviour
 {
-    RoadManager RoadManagerComponent;
-    EnemyManager EnemyManagerComponent;
+    private RoadManager RoadManagerObject;
+
+    private EnemyManager EnemyManagerObject;
 
     void Start()
     {
-        RoadManagerComponent = GetComponent<RoadManager>();
-        EnemyManagerComponent = GetComponent<EnemyManager>();
+        RoadManagerObject = GameObject.Find("RoadManager").GetComponent<RoadManager>();
+        EnemyManagerObject = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
     }
 
-    // Update is called once per frame
     void Update() { }
 
-    public void SpawnTriggerEntered()
+    private void OnTriggerExit(Collider otherCollider)
     {
-        Debug.Log("SpawnTriggerEntered");
-        RoadManagerComponent.MoveRoad();
-        EnemyManagerComponent.SpawnEnemy();
+        Debug.Log("OnTriggerExit");
+        if (otherCollider.CompareTag("Player"))
+        {
+            Debug.Log("CompareTag(player)");
+            RoadManagerObject.MoveRoad();
+            EnemyManagerObject.SpawnEnemy();
+        }
     }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7427702994566818781}
   - component: {fileID: 7427702994566818780}
   - component: {fileID: 7427702994566818783}
-  - component: {fileID: -3384687918807370725}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -99,18 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3384687918807370725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7427702994566818782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd736d4e302810543bfeff5b6f90953e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7427702996249722285
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +110,7 @@ GameObject:
   - component: {fileID: 7427702996249722273}
   - component: {fileID: 7427702996249722272}
   - component: {fileID: 7427702996249722275}
+  - component: {fileID: 3020961039956962522}
   m_Layer: 0
   m_Name: RoadSpawnTrigger
   m_TagString: RoadSpawnTrigger
@@ -208,3 +196,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3020961039956962522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7427702996249722285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd736d4e302810543bfeff5b6f90953e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

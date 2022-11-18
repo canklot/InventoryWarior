@@ -11,8 +11,7 @@ public class Character : MonoBehaviour
 
     //private bool _isAttacking = false;
 
-    [SerializeField]
-    private RoadManager RoadManagerObject;
+
 
     void Awake()
     {
@@ -30,14 +29,6 @@ public class Character : MonoBehaviour
         if (_isWalking)
         {
             _characterController.Move(Vector3.forward * _moveSpeed * Time.deltaTime);
-        }
-    }
-
-    private void OnTriggerExit(Collider otherCollider)
-    {
-        if (otherCollider.CompareTag("RoadSpawnTrigger"))
-        {
-            RoadManagerObject.MoveRoad();
         }
     }
 
