@@ -6,9 +6,11 @@ public class EnemyManager : MonoBehaviour
 {
     public GameObject EnemyPrefab;
 
-    public void SpawnEnemy()
+    [SerializeField]
+    private GameObject EnemySpawnPointObject;
+
+    public void SpawnEnemy(Vector3 SpawnCoordinate)
     {
-        Debug.Log("spawn");
-        Instantiate(EnemyPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Instantiate(EnemyPrefab, SpawnCoordinate, Quaternion.identity);
     }
 }

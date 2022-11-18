@@ -7,23 +7,26 @@ public class RoadSpawnTrigger : MonoBehaviour
     private RoadManager RoadManagerObject;
 
     private EnemyManager EnemyManagerObject;
+    private GameObject TheRoad;
+    private GameObject EnemySpawnPoint;
 
     void Start()
     {
         RoadManagerObject = GameObject.Find("RoadManager").GetComponent<RoadManager>();
         EnemyManagerObject = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        TheRoad = this.transform.parent.gameObject;
+        EnemySpawnPoint = TheRoad.gameObject.transform.GetChild(1).gameObject;
     }
 
     void Update() { }
 
     private void OnTriggerExit(Collider otherCollider)
     {
-        Debug.Log("OnTriggerExit");
         if (otherCollider.CompareTag("Player"))
         {
-            Debug.Log("CompareTag(player)");
             RoadManagerObject.MoveRoad();
-            EnemyManagerObject.SpawnEnemy();
+            Vector3 SpawnEnemyCoordinate = EnemySpawnPoint.transform.position;
+            EnemyManagerObject.SpawnEnemy(SpawnEnemyCoordinate);
         }
     }
 }
