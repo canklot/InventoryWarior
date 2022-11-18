@@ -45,6 +45,12 @@ public class HeathBarClass : MonoBehaviour
         CheckDead();
     }
 
+    void DeadAnimComplete()
+    {
+        Debug.Log("Animation over");
+        Destroy(gameObject);
+    }
+
     void CheckDead()
     {
         if (currentHp == 0)
