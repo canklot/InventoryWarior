@@ -25,7 +25,7 @@ public class RoadSpawnTrigger : MonoBehaviour
         if (otherCollider.CompareTag("Player"))
         {
             RoadManagerObject.MoveRoad();
-            Vector3 SpawnEnemyCoordinate = EnemySpawnPoint.transform.position;
+            Transform SpawnEnemyCoordinate = EnemySpawnPoint.transform;
             EnemyManagerObject.SpawnEnemy(SpawnEnemyCoordinate);
         }
     }

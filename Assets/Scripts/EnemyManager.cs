@@ -9,8 +9,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private GameObject EnemySpawnPointObject;
 
-    public void SpawnEnemy(Vector3 SpawnCoordinate)
+    public void SpawnEnemy(Transform SpawnTransform)
     {
-        Instantiate(EnemyPrefab, SpawnCoordinate, Quaternion.identity);
+        Instantiate(EnemyPrefab, SpawnTransform.position, SpawnTransform.rotation);
     }
 }
