@@ -9,10 +9,6 @@ public class Character : MonoBehaviour
     private float _moveSpeed = 4f;
     private bool _isWalking = true;
 
-    //private bool _isAttacking = false;
-
-
-
     void Awake()
     {
         _characterController = gameObject.GetComponent<CharacterController>();
@@ -21,10 +17,10 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        Move();
+        MovementLogic();
     }
 
-    void Move()
+    void MovementLogic()
     {
         if (_isWalking)
         {
@@ -32,13 +28,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider otherCollider)
+    public void Stop()
     {
-        if (otherCollider.gameObject.name == "AttackTrigger")
-        {
-            //_isAttacking = true;
-            _isWalking = false;
-            _animator.SetBool("isAttacking", true);
-        }
+        _isWalking = false;
+    }
+
+    public void Move()
+    {
+        _isWalking = true;
     }
 }

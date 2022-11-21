@@ -11,11 +11,13 @@ public class RoadSpawnTrigger : MonoBehaviour
     private GameObject EnemySpawnPoint;
 
     void Start()
-    {
+    { // Search all the gameobjects on the scene with the name
         RoadManagerObject = GameObject.Find("RoadManager").GetComponent<RoadManager>();
         EnemyManagerObject = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        // Get parent
         TheRoad = this.transform.parent.gameObject;
-        EnemySpawnPoint = TheRoad.gameObject.transform.GetChild(1).gameObject;
+        // Get child
+        EnemySpawnPoint = TheRoad.gameObject.transform.Find("EnemySpawnPoint").gameObject;
     }
 
     void Update() { }
