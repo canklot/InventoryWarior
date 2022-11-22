@@ -24,15 +24,7 @@ public class Attack : MonoBehaviour
         Debug.Log(OtherCollider.name);
         if (OtherCollider.CompareTag("Enemy"))
         {
-            AttackedObject = this.transform.parent.gameObject;
             OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();
-            // OtherHealthBar = AttackedObject.transform
-            //    .Find("AttackTrigger")
-            //    .GetComponent<HeathBarClass>();
-
-
-            //  Animator AttackerAnimator = OtherCollider.GetComponent<Animator>();
-            //  AttackerAnimator.SetBool("isAttacking", true);
         }
     }
 }
