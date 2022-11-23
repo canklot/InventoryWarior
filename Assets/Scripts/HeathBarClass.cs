@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Diagnostics;
 
 public class HeathBarClass : MonoBehaviour
 {
@@ -12,6 +11,8 @@ public class HeathBarClass : MonoBehaviour
     public int maxHp = 100;
     public int currentHp;
     private Animator _animator;
+    public delegate void AnimationComplete();
+    public static event AnimationComplete AnimationCompleteEvent;
 
     void Awake()
     {
@@ -53,6 +54,7 @@ public class HeathBarClass : MonoBehaviour
     void DeadAnimComplete()
     {
         Destroy(gameObject);
+        AnimationCompleteEvent();
     }
 
     void CheckDead()

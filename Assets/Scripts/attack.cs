@@ -7,10 +7,14 @@ public class Attack : MonoBehaviour
     GameObject AttackedObject;
     GameObject ParentObject;
     Animator ParentAnimator;
+    Animator AttackedAnimator;
     int RemainingEnemyHp;
     static HeathBarClass OtherHealthBar;
 
-    void Start() { }
+    void OnEnable()
+    {
+        HeathBarClass.AnimationCompleteEvent += AttackedGameObjeDeatchAnimationComplete;
+    }
 
     void Update() { }
 
@@ -36,7 +40,14 @@ public class Attack : MonoBehaviour
             OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();
             ParentObject = gameObject.transform.parent.gameObject;
             ParentAnimator = ParentObject.GetComponent<Animator>();
+
             ParentAnimator.SetBool("isAttacking", true);
+            ParentAnimator.SetBool("isWalking", false);
         }
+    }
+
+    void AttackedGameObjeDeatchAnimationComplete()
+    {
+        ParentAnimator.SetBool("isWalking", true);
     }
 }
