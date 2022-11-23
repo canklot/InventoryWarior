@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Diagnostics;
 
 public class HeathBarClass : MonoBehaviour
 {
@@ -38,11 +39,15 @@ public class HeathBarClass : MonoBehaviour
         fill.color = HealthGradient.Evaluate(HealthSlider.normalizedValue);
     }
 
-    public void TakeDamage(int damage)
+    public int TakeDamage(int damage)
     {
-        currentHp -= damage;
-        SetHealth(currentHp);
-        CheckDead();
+        if (currentHp > 0)
+        {
+            currentHp -= damage;
+            SetHealth(currentHp);
+            CheckDead();
+        }
+        return currentHp;
     }
 
     void DeadAnimComplete()
