@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    GameObject AttackedObject;
     GameObject ParentObject;
     Animator ParentAnimator;
-    Animator AttackedAnimator;
     int RemainingEnemyHp;
     static HeathBarClass OtherHealthBar;
 
@@ -25,7 +23,6 @@ public class Attack : MonoBehaviour
             RemainingEnemyHp = OtherHealthBar.TakeDamage(1);
             if (RemainingEnemyHp < 1)
             {
-                Debug.Log(RemainingEnemyHp);
                 ParentAnimator.SetBool("isAttacking", false);
             }
         }
@@ -36,7 +33,6 @@ public class Attack : MonoBehaviour
         //Debug.Log(OtherCollider.name);
         if (OtherCollider.CompareTag("Enemy"))
         {
-            Debug.Log("trigger enter");
             OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();
             ParentObject = gameObject.transform.parent.gameObject;
             ParentAnimator = ParentObject.GetComponent<Animator>();
