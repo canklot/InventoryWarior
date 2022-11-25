@@ -21,6 +21,7 @@ public class ScoreManager : MonoBehaviour
     {
         // Make sure player start position is zero
         Score = (int)ThePlayer.transform.position.z;
-        ScoreTMP.text = Score.ToString();
+        string ScoreText = string.Format("Score: {0}", Score.ToString());
+        ScoreTMP.text = ScoreText;
     }
 }
