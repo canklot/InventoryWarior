@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     GameObject ParentObject;
     Animator ParentAnimator;
     int RemainingEnemyHp;
-    static HeathBarClass OtherHealthBar;
+    HeathBarClass OtherHealthBar;
 
     void OnEnable()
     {
@@ -30,9 +30,10 @@ public class Attack : MonoBehaviour
 
     void OnTriggerEnter(Collider OtherCollider)
     {
-        //Debug.Log(OtherCollider.name);
+        Debug.Log(OtherCollider.name);
         if (OtherCollider.CompareTag("Enemy"))
         {
+            Debug.Log(OtherCollider.tag);
             OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();
             ParentObject = gameObject.transform.parent.gameObject;
             ParentAnimator = ParentObject.GetComponent<Animator>();
