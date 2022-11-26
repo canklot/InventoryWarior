@@ -24,7 +24,6 @@ public class StopTrigger : MonoBehaviour
     {
         if (OtherCollider.CompareTag("Enemy"))
         {
-            Debug.Log("stop enemy");
             CharacterScript.Stop();
         }
     }

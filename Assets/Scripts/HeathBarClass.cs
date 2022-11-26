@@ -42,7 +42,7 @@ public class HeathBarClass : MonoBehaviour
 
     public int TakeDamage(int damage)
     {
-        if (currentHp > 0)
+        if (currentHp >= 0)
         {
             currentHp -= damage;
             SetHealth(currentHp);
