@@ -1291,6 +1291,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028599406380217922, guid: ba17f849390803147ae7c912a9aa764d, type: 3}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028599406380217932, guid: ba17f849390803147ae7c912a9aa764d, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028599406380217932, guid: ba17f849390803147ae7c912a9aa764d, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028599406380217932, guid: ba17f849390803147ae7c912a9aa764d, type: 3}
+      propertyPath: m_Size.z
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []

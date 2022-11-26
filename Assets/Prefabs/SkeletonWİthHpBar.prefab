@@ -3962,6 +3962,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 443168224849661282}
     m_Modifications:
+    - target: {fileID: 2921806466084708464, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921806466084708464, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921806466084708464, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
+      propertyPath: m_Size.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2921806466084708477, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
       propertyPath: m_Name
       value: AttackTrigger
