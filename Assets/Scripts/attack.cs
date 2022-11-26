@@ -44,8 +44,9 @@ public class Attack : MonoBehaviour
         if (OtherCollider.gameObject == ParentObject.gameObject)
         {
             Debug.Log("same");
+            return;
         }
-        if (OtherCollider.CompareTag("Enemy"))
+        if (OtherCollider.CompareTag("Enemy") | OtherCollider.CompareTag("Player"))
         {
             Debug.Log(OtherCollider.tag);
             OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();

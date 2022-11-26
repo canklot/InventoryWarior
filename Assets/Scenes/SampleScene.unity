@@ -1255,7 +1255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 443168224849661282, guid: ba17f849390803147ae7c912a9aa764d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 443168224849661282, guid: ba17f849390803147ae7c912a9aa764d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1655,6 +1655,10 @@ PrefabInstance:
     - target: {fileID: 2921806466084708478, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921806466084708479, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2921806466084708479, guid: 0fe8651c3a31a11488b78baaf935fbf5, type: 3}
       propertyPath: AttackPower
