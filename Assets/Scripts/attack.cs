@@ -10,6 +10,9 @@ public class Attack : MonoBehaviour
     HeathBarClass OtherHealthBar;
     Character CharacterScript;
 
+    [SerializeField]
+    private int AttackPower;
+
     void OnEnable()
     {
         HeathBarClass.AnimationCompleteEvent += AttackedGameObjeDeatchAnimationComplete;
@@ -27,7 +30,7 @@ public class Attack : MonoBehaviour
     {
         if (OtherCollider.CompareTag("Enemy"))
         {
-            RemainingEnemyHp = OtherHealthBar.TakeDamage(1);
+            RemainingEnemyHp = OtherHealthBar.TakeDamage(AttackPower);
             if (RemainingEnemyHp < 1)
             {
                 ParentAnimator.SetBool("isAttacking", false);
@@ -37,7 +40,11 @@ public class Attack : MonoBehaviour
 
     void OnTriggerEnter(Collider OtherCollider)
     {
-        //Debug.Log(OtherCollider.name);
+        //Debug.Log(OtherCollider.name)
+        if (OtherCollider.gameObject == ParentObject.gameObject)
+        {
+            Debug.Log("same");
+        }
         if (OtherCollider.CompareTag("Enemy"))
         {
             Debug.Log(OtherCollider.tag);
