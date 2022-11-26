@@ -21,6 +21,7 @@ public class HeathBarClass : MonoBehaviour
 
     void Start()
     {
+        SetMaxHealth(maxHp);
         currentHp = maxHp;
     }
 
