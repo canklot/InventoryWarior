@@ -22,8 +22,12 @@ public class Attack : MonoBehaviour
 
     void OnTriggerStay(Collider OtherCollider)
     {
-        if (OtherCollider.CompareTag("Enemy"))
+        if (OtherCollider.gameObject == ParentObject.gameObject)
         {
+            return;
+        }
+        if (OtherCollider.CompareTag("Enemy") | OtherCollider.CompareTag("Player"))
+        { //change enemyhp with otherhp
             RemainingEnemyHp = OtherHealthBar.TakeDamage(AttackPower);
             if (RemainingEnemyHp < 1)
             {
