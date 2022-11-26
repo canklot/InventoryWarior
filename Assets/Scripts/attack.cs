@@ -8,20 +8,14 @@ public class Attack : MonoBehaviour
     Animator ParentAnimator;
     int RemainingEnemyHp;
     HeathBarClass OtherHealthBar;
-    Character CharacterScript;
 
     [SerializeField]
     private int AttackPower;
 
     void OnEnable()
     {
-        HeathBarClass.AnimationCompleteEvent += AttackedGameObjeDeatchAnimationComplete;
         ParentObject = gameObject.transform.parent.gameObject;
         ParentAnimator = ParentObject.GetComponent<Animator>();
-        if (ParentObject.tag == "Player")
-        {
-            CharacterScript = ParentObject.GetComponent<Character>();
-        }
     }
 
     void Update() { }
@@ -43,31 +37,16 @@ public class Attack : MonoBehaviour
         //Debug.Log(OtherCollider.name)
         if (OtherCollider.gameObject == ParentObject.gameObject)
         {
-            Debug.Log("same");
+            // Debug.Log("same");
             return;
         }
         if (OtherCollider.CompareTag("Enemy") | OtherCollider.CompareTag("Player"))
         {
-            Debug.Log(OtherCollider.tag);
+            // Debug.Log(OtherCollider.tag);
             OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();
 
             ParentAnimator.SetBool("isAttacking", true);
             ParentAnimator.SetBool("isWalking", false);
-
-            if (ParentObject.tag == "Player")
-            {
-                Debug.Log("Stop");
-                CharacterScript.Stop();
-            }
-        }
-    }
-
-    void AttackedGameObjeDeatchAnimationComplete()
-    {
-        ParentAnimator.SetBool("isWalking", true);
-        if (ParentObject.tag == "Player")
-        {
-            CharacterScript.Move();
         }
     }
 }
