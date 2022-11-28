@@ -6,7 +6,6 @@ public class RoadManager : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> roads;
-    private float Offset = 30f; //make this road z
 
     void Start() { }
 
@@ -16,6 +15,7 @@ public class RoadManager : MonoBehaviour
     public void MoveRoad()
     {
         GameObject TheRoad = roads[0];
+        float Offset = TheRoad.transform.localScale.z; //make this road z
         roads.Remove(TheRoad);
         float newZ = roads[roads.Count - 1].transform.position.z + Offset;
         TheRoad.transform.position = new Vector3(0, 0, newZ);

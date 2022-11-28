@@ -10,10 +10,12 @@ public class HeathBarClass : MonoBehaviour
     public Image fill;
     public int maxHp = 100;
     public int currentHp;
+    public bool isDead { get; private set; } = false;
     private Animator _animator;
     public delegate void AnimationComplete();
     public static event AnimationComplete AnimationCompleteEvent;
 
+    //add event for player dead
     void Awake()
     {
         _animator = gameObject.GetComponent<Animator>();
@@ -62,6 +64,7 @@ public class HeathBarClass : MonoBehaviour
     {
         if (currentHp == 0)
         {
+            isDead = true;
             _animator.SetBool("isDead", true);
         }
     }
