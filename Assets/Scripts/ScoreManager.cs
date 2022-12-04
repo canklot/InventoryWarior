@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI ScoreTMP;
-    private int Score = 0;
+    public static int Score { get; private set; } = 0;
 
     void Update()
     {

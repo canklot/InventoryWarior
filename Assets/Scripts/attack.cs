@@ -6,7 +6,7 @@ public class Attack : MonoBehaviour
 {
     GameObject ParentObject;
     Animator ParentAnimator;
-    int RemainingEnemyHp;
+    int RemainingOtherHp;
     HeathBarClass OtherHealthBar;
 
     [SerializeField]
@@ -28,11 +28,7 @@ public class Attack : MonoBehaviour
         }
         if (OtherCollider.CompareTag("Enemy") | OtherCollider.CompareTag("Player"))
         { //change enemyhp with otherhp
-            RemainingEnemyHp = OtherHealthBar.TakeDamage(AttackPower);
-            if (RemainingEnemyHp < 1)
-            {
-                ParentAnimator.SetBool("isAttacking", false);
-            }
+            DealDamageToOther();
         }
     }
 
@@ -51,6 +47,15 @@ public class Attack : MonoBehaviour
 
             ParentAnimator.SetBool("isAttacking", true);
             ParentAnimator.SetBool("isWalking", false);
+        }
+    }
+
+    void DealDamageToOther()
+    {
+        RemainingOtherHp = OtherHealthBar.TakeDamage(AttackPower);
+        if (RemainingOtherHp < 1)
+        {
+            ParentAnimator.SetBool("isAttacking", false);
         }
     }
 }
