@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HeathBarClass : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class HeathBarClass : MonoBehaviour
     public bool isDead { get; private set; } = false;
     private Animator _animator;
     public delegate void AnimationComplete();
-    public static event AnimationComplete AnimationCompleteEvent;
+    public static event AnimationComplete DeadAnimationCompleteEnemyEvent;
+    public static event AnimationComplete DeadAnimationCompletePlayerEvent;
 
     //add event for player dead
     void Awake()
@@ -54,10 +56,17 @@ public class HeathBarClass : MonoBehaviour
         return currentHp;
     }
 
-    void DeadAnimComplete()
+    void DeadAnimCompleteEnemy()
     {
         Destroy(gameObject);
-        AnimationCompleteEvent();
+
+        DeadAnimationCompleteEnemyEvent();
+    }
+
+    void DeadAnimCompletePlayer()
+    { //has no subscribers also delete event
+        //DeadAnimationCompletePlayerEvent();
+        SceneManager.LoadScene("GameOverScene");
     }
 
     void CheckDead()

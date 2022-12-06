@@ -17,7 +17,8 @@ public class StopTrigger : MonoBehaviour
         {
             CharacterScript = ParentObject.GetComponent<Character>();
         }
-        HeathBarClass.AnimationCompleteEvent += AttackedGameObjeDeatchAnimationComplete;
+
+        HeathBarClass.DeadAnimationCompleteEnemyEvent += AttackedGameObjeDeatchAnimationComplete;
     }
 
     void OnTriggerEnter(Collider OtherCollider)

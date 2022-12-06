@@ -6,14 +6,6 @@ using TMPro;
 public class GameOverScript : MonoBehaviour
 {
     [SerializeField]
-    private GameObject ThePlayer;
-    Character CharacterScript;
-    HeathBarClass PlayerHealthBar;
-
-    [SerializeField]
-    private ScoreManager TheScoreManager;
-
-    [SerializeField]
     GameObject GameOverCanvas;
 
     [SerializeField]
@@ -22,20 +14,18 @@ public class GameOverScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CharacterScript = ThePlayer.GetComponent<Character>();
-        PlayerHealthBar = ThePlayer.GetComponent<HeathBarClass>();
-        GameOverCanvas.SetActive(false);
+        ActivateGameOverScreen();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() { }
+
+    void ActivateGameOverScreen()
     {
-        if (PlayerHealthBar.isDead)
-        {
-            Debug.Log("dead");
-            string score = ScoreManager.Score.ToString();
-            ScorTextMesh.text = $"Your Score was \n {score}";
-            GameOverCanvas.SetActive(true);
-        }
+        Debug.Log("dead");
+        string Score = ScoreManager.Score.ToString();
+        Debug.Log(Score);
+        ScorTextMesh.text = $"Your Score was \n {Score}";
+        GameOverCanvas.SetActive(true);
     }
 }
