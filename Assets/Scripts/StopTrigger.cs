@@ -6,7 +6,7 @@ public class StopTrigger : MonoBehaviour
 {
     GameObject ParentObject;
     Character CharacterScript;
-
+    HealthBarClass PlayerHealthBar;
     Animator ParentAnimator;
 
     void OnEnable()
@@ -16,6 +16,7 @@ public class StopTrigger : MonoBehaviour
         if (ParentObject.tag == "Player")
         {
             CharacterScript = ParentObject.GetComponent<Character>();
+            PlayerHealthBar = ParentObject.GetComponent<HealthBarClass>();
         }
 
         HealthBarClass.DeadAnimationCompleteEnemyEvent += AttackedGameObjeDeatchAnimationComplete;
@@ -31,6 +32,10 @@ public class StopTrigger : MonoBehaviour
 
     void AttackedGameObjeDeatchAnimationComplete()
     {
+        if (PlayerHealthBar.isDead)
+        {
+            return;
+        }
         ParentAnimator.SetBool("isWalking", true);
         if (ParentObject.tag == "Player")
         {
