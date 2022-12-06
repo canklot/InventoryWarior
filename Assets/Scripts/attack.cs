@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     GameObject ParentObject;
     Animator ParentAnimator;
     int RemainingOtherHp;
-    HeathBarClass OtherHealthBar;
+    HealthBarClass OtherHealthBar;
 
     [SerializeField]
     private int AttackPower;
@@ -34,7 +34,6 @@ public class Attack : MonoBehaviour
 
     void OnTriggerEnter(Collider OtherCollider)
     {
-        //Debug.Log(OtherCollider.name)
         if (OtherCollider.gameObject == ParentObject.gameObject)
         {
             // Debug.Log("same");
@@ -42,9 +41,7 @@ public class Attack : MonoBehaviour
         }
         if (OtherCollider.CompareTag("Enemy") | OtherCollider.CompareTag("Player"))
         {
-            // Debug.Log(OtherCollider.tag);
-            OtherHealthBar = OtherCollider.GetComponent<HeathBarClass>();
-
+            OtherHealthBar = OtherCollider.GetComponent<HealthBarClass>();
             ParentAnimator.SetBool("isAttacking", true);
             ParentAnimator.SetBool("isWalking", false);
         }

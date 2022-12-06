@@ -22,9 +22,7 @@ public class GameOverScript : MonoBehaviour
 
     void ActivateGameOverScreen()
     {
-        Debug.Log("dead");
         string Score = ScoreManager.Score.ToString();
-        Debug.Log(Score);
         ScorTextMesh.text = $"Your Score was \n {Score}";
         GameOverCanvas.SetActive(true);
     }

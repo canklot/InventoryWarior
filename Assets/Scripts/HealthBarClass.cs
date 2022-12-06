@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class HeathBarClass : MonoBehaviour
+public class HealthBarClass : MonoBehaviour
 {
     public Slider HealthSlider;
     public Gradient HealthGradient;
@@ -15,7 +15,6 @@ public class HeathBarClass : MonoBehaviour
     private Animator _animator;
     public delegate void AnimationComplete();
     public static event AnimationComplete DeadAnimationCompleteEnemyEvent;
-    public static event AnimationComplete DeadAnimationCompletePlayerEvent;
 
     //add event for player dead
     void Awake()

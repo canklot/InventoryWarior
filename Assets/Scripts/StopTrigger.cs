@@ -6,11 +6,11 @@ public class StopTrigger : MonoBehaviour
 {
     GameObject ParentObject;
     Character CharacterScript;
+
     Animator ParentAnimator;
 
     void OnEnable()
     {
-        ParentObject = gameObject.transform.parent.gameObject;
         ParentObject = gameObject.transform.parent.gameObject;
         ParentAnimator = ParentObject.GetComponent<Animator>();
         if (ParentObject.tag == "Player")
@@ -18,7 +18,7 @@ public class StopTrigger : MonoBehaviour
             CharacterScript = ParentObject.GetComponent<Character>();
         }
 
-        HeathBarClass.DeadAnimationCompleteEnemyEvent += AttackedGameObjeDeatchAnimationComplete;
+        HealthBarClass.DeadAnimationCompleteEnemyEvent += AttackedGameObjeDeatchAnimationComplete;
     }
 
     void OnTriggerEnter(Collider OtherCollider)
