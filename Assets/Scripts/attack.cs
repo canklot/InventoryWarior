@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    // Always make enemy attack range longer than player stop range
     GameObject ParentObject;
     Animator ParentAnimator;
     int RemainingOtherHp;

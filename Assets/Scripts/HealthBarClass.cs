@@ -70,7 +70,7 @@ public class HealthBarClass : MonoBehaviour
 
     void CheckDead()
     {
-        if (currentHp == 0)
+        if (currentHp < 1)
         {
             isDead = true;
             _animator.SetBool("isDead", true);

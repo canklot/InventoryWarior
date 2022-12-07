@@ -26,6 +26,7 @@ public class StopTrigger : MonoBehaviour
     {
         if (OtherCollider.CompareTag("Enemy"))
         {
+            ParentAnimator.SetBool("isWalking", false);
             CharacterScript.Stop();
         }
     }
