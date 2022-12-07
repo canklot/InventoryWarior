@@ -28,8 +28,8 @@ public class Attack : MonoBehaviour
             return;
         }
         if (OtherCollider.CompareTag("Enemy") | OtherCollider.CompareTag("Player"))
-        { //change enemyhp with otherhp
-            DealDamageToOther();
+        { //try with animation event
+            //DealDamageToOther();
         }
     }
 
@@ -48,8 +48,9 @@ public class Attack : MonoBehaviour
         }
     }
 
-    void DealDamageToOther()
+    public void DealDamageToOther()
     {
+        Debug.Log("DealDamageToOther");
         RemainingOtherHp = OtherHealthBar.TakeDamage(AttackPower);
         if (RemainingOtherHp < 1)
         {

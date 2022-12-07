@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 447909754532672785}
   - component: {fileID: 447909754532672784}
   - component: {fileID: 447909754532672791}
+  - component: {fileID: 8179383241344524735}
   m_Layer: 0
   m_Name: "SkeletonW\u0130thHpBar"
   m_TagString: Enemy
@@ -368,6 +369,18 @@ MonoBehaviour:
   fill: {fileID: 447909753037302884}
   maxHp: 100
   currentHp: 1
+--- !u!114 &8179383241344524735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446180072424455222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883c749057334e84d935641f4e35f496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &446189131650094592
 GameObject:
   m_ObjectHideFlags: 0

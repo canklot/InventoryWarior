@@ -19,7 +19,7 @@ public class StopTrigger : MonoBehaviour
             PlayerHealthBar = ParentObject.GetComponent<HealthBarClass>();
         }
 
-        HealthBarClass.DeadAnimationCompleteEnemyEvent += AttackedGameObjeDeatchAnimationComplete;
+        EventReciver.DeadAnimationCompleteEnemyEvent += AttackedGameObjeDeatchAnimationComplete;
     }
 
     void OnTriggerEnter(Collider OtherCollider)
