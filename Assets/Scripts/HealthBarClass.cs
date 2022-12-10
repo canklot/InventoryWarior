@@ -43,9 +43,10 @@ public class HealthBarClass : MonoBehaviour
 
     public int TakeDamage(int damage)
     {
-        if (currentHp >= 0)
+        if (currentHp > 0)
         {
             currentHp -= damage;
+            currentHp = Mathf.Clamp(currentHp, 0, 100);
             SetHealth(currentHp);
             CheckDead();
         }
@@ -54,10 +55,11 @@ public class HealthBarClass : MonoBehaviour
 
     void CheckDead()
     {
-        if (currentHp < 1)
+        if (currentHp == 0)
         {
             isDead = true;
             _animator.SetBool("isDead", true);
+            _animator.SetTrigger("isDeadTrigger");
         }
     }
 }

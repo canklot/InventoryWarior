@@ -36,5 +36,6 @@ public class Character : MonoBehaviour
     public void Move()
     {
         _isWalking = true;
+        _animator.SetTrigger("isWalkingTrigger");
     }
 }
