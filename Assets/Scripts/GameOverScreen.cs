@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameOverScript : MonoBehaviour
+public class GameOverScreen : MonoBehaviour
 {
-    [SerializeField]
-    GameObject GameOverCanvas;
-
     [SerializeField]
     TextMeshProUGUI ScorTextMesh;
 
