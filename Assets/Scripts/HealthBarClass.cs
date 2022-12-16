@@ -8,7 +8,7 @@ public class HealthBarClass : MonoBehaviour
     public Slider HealthSlider;
     public Gradient HealthGradient;
     public Image fill;
-    public int maxHp = 100;
+    public int maxHp;
     public int currentHp;
     public bool isDead { get; private set; } = false;
     private Animator _animator;
@@ -46,7 +46,7 @@ public class HealthBarClass : MonoBehaviour
         if (currentHp > 0)
         {
             currentHp -= damage;
-            currentHp = Mathf.Clamp(currentHp, 0, 100);
+            currentHp = Mathf.Clamp(currentHp, 0, maxHp);
             SetHealth(currentHp);
             CheckDead();
         }
