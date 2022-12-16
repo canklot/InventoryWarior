@@ -5,13 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class EventReciver : MonoBehaviour
 {
+    // Add and use this script to object that needs to trigger events.
+    // Like animation events
+
+    Animator BlackScreenAnimator;
     public delegate void AnimationComplete();
     public static event AnimationComplete DeadAnimationCompleteEnemyEvent;
-    Attack _Attack;
+    Attack AttackClass;
 
     void OnEnable()
     {
-        _Attack = gameObject.GetComponentInChildren<Attack>();
+        AttackClass = gameObject.GetComponentInChildren<Attack>();
+        BlackScreenAnimator = GameObject.FindWithTag("BlackScreen").GetComponent<Animator>();
     }
 
     void DeadAnimCompleteEnemy()
@@ -22,12 +27,16 @@ public class EventReciver : MonoBehaviour
 
     void DeadAnimCompletePlayer()
     {
+        BlackScreenAnimator.SetTrigger("FadeIn");
+    }
+
+    void BlackScreenFadeInCompleted()
+    {
         SceneManager.LoadScene("GameOverScene");
     }
 
     public void Attack()
     {
-        Debug.Log("event reciver Attack");
-        _Attack.DealDamageToOther();
+        AttackClass.DealDamageToOther();
     }
 }
