@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RoadSpawnTrigger
   - Enemy
+  - BlackScreen
   layers:
   - Default
   - TransparentFX
