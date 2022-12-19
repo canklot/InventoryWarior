@@ -13,6 +13,6 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
+        //Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
     }
 }

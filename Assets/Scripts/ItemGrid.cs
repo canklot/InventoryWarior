@@ -6,6 +6,7 @@ public class ItemGrid : MonoBehaviour
 {
     RectTransform GridRectTransform;
 
+    //Maybe use a betterway to get screen size
     [SerializeField]
     Canvas NativeSizeCanvas;
 
@@ -24,11 +25,11 @@ public class ItemGrid : MonoBehaviour
         RectTransform NativeCanvasRect = NativeSizeCanvas.GetComponent<RectTransform>();
         RectTransform ScaledCanvasRect = ScaledSizeCanvas.GetComponent<RectTransform>();
 
-        TileSizeWidth = NativeCanvasRect.rect.width / ScaledCanvasRect.rect.width;
+        TileSizeWidth = Screen.width / ScaledCanvasRect.rect.width;
         TileSizeWidth = TileSizeWidth * ReferancePixelPerUnit;
         // When set to fit width, height and with are the same
         TileSizeHeight = TileSizeWidth;
-        Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
+        //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
     }
 
     Vector2 PositionOnTheGrid = new Vector2();
@@ -36,7 +37,7 @@ public class ItemGrid : MonoBehaviour
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
     {
-        Debug.Log("mouse position " + MousePosition.x + "   " + MousePosition.y);
+        //Debug.Log("mouse position " + MousePosition.x + "   " + MousePosition.y);
         PositionOnTheGrid.x = MousePosition.x - GridRectTransform.position.x;
         PositionOnTheGrid.y = MousePosition.y - GridRectTransform.position.y;
 
