@@ -50,7 +50,6 @@ public class Attack : MonoBehaviour
 
     public void DealDamageToOther()
     {
-        Debug.Log("DealDamageToOther");
         RemainingOtherHp = OtherHealthBar.TakeDamage(AttackPower);
         if (RemainingOtherHp < 1)
         {
