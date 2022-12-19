@@ -4,46 +4,41 @@ using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
 {
-    RectTransform GridRectTransform;
-
-    //Maybe use a betterway to get screen size
+    // This script calculates on what grid coordinates the mouse is
+    // Its competatible with a canvas that scale with screen size
+    // Looks like it also works when its set to strech, anchor and pivot set to bottom mid
     [SerializeField]
-    Canvas NativeSizeCanvas;
+    Canvas InventoryCanvas;
 
-    [SerializeField]
-    Canvas ScaledSizeCanvas;
-
-    // If your canvas is scales with screensize
-    // use referace pixel per unit and not image width and height
     float TileSizeWidth;
     float TileSizeHeight;
     float ReferancePixelPerUnit = 100;
 
+    Vector2 GridCoordinates = new Vector2();
+    Vector2Int TileCoordinates = new Vector2Int();
+    RectTransform GridRectTransform;
+
     private void Start()
     {
         GridRectTransform = GetComponent<RectTransform>();
-        RectTransform NativeCanvasRect = NativeSizeCanvas.GetComponent<RectTransform>();
-        RectTransform ScaledCanvasRect = ScaledSizeCanvas.GetComponent<RectTransform>();
+        RectTransform InventoryCanvasRect = InventoryCanvas.GetComponent<RectTransform>();
 
-        TileSizeWidth = Screen.width / ScaledCanvasRect.rect.width;
+        TileSizeWidth = Screen.width / InventoryCanvasRect.rect.width;
         TileSizeWidth = TileSizeWidth * ReferancePixelPerUnit;
         // When set to fit width, height and with are the same
         TileSizeHeight = TileSizeWidth;
         //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
     }
 
-    Vector2 PositionOnTheGrid = new Vector2();
-    Vector2Int TileGridPosition = new Vector2Int();
-
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
     {
         //Debug.Log("mouse position " + MousePosition.x + "   " + MousePosition.y);
-        PositionOnTheGrid.x = MousePosition.x - GridRectTransform.position.x;
-        PositionOnTheGrid.y = MousePosition.y - GridRectTransform.position.y;
+        GridCoordinates.x = MousePosition.x - GridRectTransform.position.x;
+        GridCoordinates.y = MousePosition.y - GridRectTransform.position.y;
 
-        TileGridPosition.x = (int)(PositionOnTheGrid.x / TileSizeWidth);
-        TileGridPosition.y = (int)(PositionOnTheGrid.y / TileSizeHeight);
+        TileCoordinates.x = (int)(GridCoordinates.x / TileSizeWidth);
+        TileCoordinates.y = (int)(GridCoordinates.y / TileSizeHeight);
 
-        return TileGridPosition;
+        return TileCoordinates;
     }
 }
