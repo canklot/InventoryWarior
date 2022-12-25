@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField]
-    ItemGrid SelectedItemGrid;
+    [HideInInspector]
+    public ItemGrid SelectedItemGrid;
 
-    // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        SelectedItemGrid = null;
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
+        if (SelectedItemGrid == null)
+        {
+            return;
+        }
+
+        Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
     }
 }

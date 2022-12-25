@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class ItemGrid : MonoBehaviour
     Vector2Int TileCoordinates = new Vector2Int();
     RectTransform GridRectTransform;
 
+    InventoryItem[,] InventoryItemSlot;
+
     private void Start()
     {
         GridRectTransform = GetComponent<RectTransform>();
@@ -28,6 +31,16 @@ public class ItemGrid : MonoBehaviour
         // When set to fit width, height and with are the same
         TileSizeHeight = TileSizeWidth;
         //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
+
+        Inıt(1, 1);
+    }
+
+    private void Inıt(int width, int height)
+    {
+        //re
+        InventoryItemSlot = new InventoryItem[width, height];
+        Vector2 size = new Vector2(width * TileSizeWidth, height * TileSizeHeight);
+        GridRectTransform.sizeDelta = size;
     }
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
