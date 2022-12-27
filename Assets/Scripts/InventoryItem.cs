@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int sizeWidth;
+    public int sizeHeight;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Start() { }
+
+    void Update() { }
 }
