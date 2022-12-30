@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
 {
-    public int sizeWidth;
-    public int sizeHeight;
+    public int sizeWidth = 1;
+    public int sizeHeight = 1;
 
     void Start() { }
 

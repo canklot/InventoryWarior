@@ -13,9 +13,13 @@ public class ItemGrid : MonoBehaviour
     Canvas InventoryCanvas;
     RectTransform InventoryCanvasRect;
 
-    float TileSizeWidth;
-    float TileSizeHeight;
     float ReferancePixelPerUnit = 100;
+    float TileWidthOnNativeCanvas;
+    float TileHeightOnNativeCanvas;
+    float TileWidthOnGridCanvas;
+    float TileHeightOnGridCanvas;
+
+    float VerticalScaleCoefficient;
 
     Vector2 GridCoordinates = new Vector2();
     Vector2Int TileCoordinates = new Vector2Int();
@@ -23,17 +27,25 @@ public class ItemGrid : MonoBehaviour
 
     InventoryItem[,] InventoryItemSlot;
 
+    [SerializeField]
+    InventoryItem InventoryItemPrefab;
+
     private void Start()
     {
+        TileWidthOnGridCanvas = ReferancePixelPerUnit;
+        TileHeightOnGridCanvas = ReferancePixelPerUnit;
+        // Looks like based on what canvas you are and if its fixed size or scales coordinates and size can change between canvas
         GridRectTransform = GetComponent<RectTransform>();
         InventoryCanvasRect = InventoryCanvas.GetComponent<RectTransform>();
-
-        TileSizeWidth = Screen.width / InventoryCanvasRect.rect.width;
-        TileSizeWidth = TileSizeWidth * ReferancePixelPerUnit;
+        // need better name TileSizeWidth. For what canvas it is
+        VerticalScaleCoefficient = Screen.width / InventoryCanvasRect.rect.width;
+        TileWidthOnNativeCanvas = VerticalScaleCoefficient * ReferancePixelPerUnit;
         // When set to fit width, height and with are the same
-        TileSizeHeight = TileSizeWidth;
+        TileHeightOnNativeCanvas = TileWidthOnNativeCanvas;
         //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
-        ResizeGrid(600, 800);
+        InventoryItemSlot = new InventoryItem[8, 4];
+        InventoryItem ItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
+        PlaceItem(ItemInstance, 1, 1);
     }
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
@@ -42,8 +54,8 @@ public class ItemGrid : MonoBehaviour
         GridCoordinates.x = MousePosition.x - GridRectTransform.position.x;
         GridCoordinates.y = MousePosition.y - GridRectTransform.position.y;
 
-        TileCoordinates.x = (int)(GridCoordinates.x / TileSizeWidth);
-        TileCoordinates.y = (int)(GridCoordinates.y / TileSizeHeight);
+        TileCoordinates.x = (int)(GridCoordinates.x / TileWidthOnNativeCanvas);
+        TileCoordinates.y = (int)(GridCoordinates.y / TileHeightOnNativeCanvas);
 
         return TileCoordinates;
     }
@@ -62,5 +74,21 @@ public class ItemGrid : MonoBehaviour
         InventoryCanvasScaler.referenceResolution = new Vector2(ResizeWidth, ResizeHeight);
         // Change vertical number of tiles
         GridRectTransform.sizeDelta = new Vector2(1, ResizeHeight);
+    }
+
+    public void PlaceItem(InventoryItem ItemToPlace, int posX, int posY)
+    {
+        RectTransform ItemToPlaceRect = ItemToPlace.GetComponent<RectTransform>();
+        ItemToPlaceRect.SetParent(GridRectTransform);
+        InventoryItemSlot[posX, posY] = ItemToPlace;
+
+        Vector2 position = new Vector2();
+        // Add half of the tile to center item
+        position.x = posX * TileWidthOnGridCanvas + TileWidthOnGridCanvas / 2;
+        position.y = posY * TileHeightOnGridCanvas + TileHeightOnGridCanvas / 2;
+
+        ItemToPlaceRect.localPosition = position;
+
+        // at the video he usses top left as anchor I use bottom left
     }
 }
