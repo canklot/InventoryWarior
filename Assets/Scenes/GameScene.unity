@@ -1495,7 +1495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryCanvas: {fileID: 1653376879}
-  InventoryItemPrefab: {fileID: 4448192006624055744, guid: b2b851087750c70419c2c006d37b7e78, type: 3}
+  InventoryItemPrefab: {fileID: 771977912195613312, guid: 1fe08391fbedf974bbc4892a48140f82, type: 3}
 --- !u!114 &293854578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6068c31cf0a81864293a5a4a2b5c8297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManagerInstanceToChange: {fileID: 1833680672}
+  InventoryManagerInstance: {fileID: 1833680672}
   SelectedItemGridBackup: {fileID: 293854577}
   DebugText: {fileID: 1178676911}
 --- !u!114 &293854579
@@ -2613,7 +2613,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   fill: {fileID: 1692412123}
-  maxHp: 300
+  maxHp: 500
   currentHp: 0
 --- !u!114 &1218591371
 MonoBehaviour:

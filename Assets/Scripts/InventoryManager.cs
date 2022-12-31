@@ -8,14 +8,12 @@ public class InventoryManager : MonoBehaviour
     public ItemGrid SelectedItemGrid;
 
     InventoryItem SelectedItem;
-
-    void Start()
-    {
-        SelectedItemGrid = null;
-    }
+    RectTransform SelectedItemRect;
 
     void Update()
     {
+        DragItemIcon();
+
         if (SelectedItemGrid == null)
         {
             return;
@@ -27,13 +25,36 @@ public class InventoryManager : MonoBehaviour
 
             if (SelectedItem == null)
             {
-                SelectedItem = SelectedItemGrid.PickUpItem(TileGridPosition.x, TileGridPosition.y);
+                PickUpItemCompound(TileGridPosition);
             }
             else
             {
-                SelectedItemGrid.PlaceItem(SelectedItem, TileGridPosition.x, TileGridPosition.y);
+                PlaceItemCompound(TileGridPosition);
             }
         }
-        Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
+        //Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
+    }
+
+    void DragItemIcon()
+    {
+        if (SelectedItem != null)
+        {
+            SelectedItemRect.position = Input.mousePosition;
+        }
+    }
+
+    void PlaceItemCompound(Vector2Int TileGridPosition)
+    {
+        SelectedItemGrid.PlaceItem(SelectedItem, TileGridPosition.x, TileGridPosition.y);
+        SelectedItem = null;
+    }
+
+    void PickUpItemCompound(Vector2Int TileGridPosition)
+    {
+        SelectedItem = SelectedItemGrid.PickUpItem(TileGridPosition.x, TileGridPosition.y);
+        if (SelectedItem != null)
+        {
+            SelectedItemRect = SelectedItem.GetComponent<RectTransform>();
+        }
     }
 }

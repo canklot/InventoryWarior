@@ -13,7 +13,7 @@ public class GridInteract
         IPointerDownHandler
 {
     [SerializeField]
-    InventoryManager InventoryManagerInstanceToChange;
+    InventoryManager InventoryManagerInstance;
 
     [SerializeField]
     ItemGrid SelectedItemGridBackup;
@@ -33,18 +33,15 @@ public class GridInteract
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        InventoryManagerInstanceToChange.SelectedItemGrid = null;
+        InventoryManagerInstance.SelectedItemGrid = null;
         Debug.Log("OnPointerExit");
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("OnPointerDown");
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            InventoryManagerInstanceToChange.SelectedItemGrid = ItemGridInstance;
-            Debug.Log("Clicked on the UI. Not Null");
-        }
+
+        InventoryManagerInstance.SelectedItemGrid = ItemGridInstance;
     }
 
     // There is some problems witch touch input

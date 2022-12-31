@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ItemGrid : MonoBehaviour
 {
+    // I dont like the name of this script
     // This script calculates on what grid coordinates the mouse is
     // Its competatible with a canvas that scale with screen size
     // Looks like it also works when its set to strech, anchor and pivot set to bottom mid
@@ -43,9 +44,12 @@ public class ItemGrid : MonoBehaviour
         // When set to fit width, height and with are the same
         TileHeightOnNativeCanvas = TileWidthOnNativeCanvas;
         //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
+
         InventoryItemSlot = new InventoryItem[8, 4];
         InventoryItem ItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
-        PlaceItem(ItemInstance, 4, 3);
+        PlaceItem(ItemInstance, 2, 2);
+        ItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
+        PlaceItem(ItemInstance, 1, 1);
     }
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
@@ -78,8 +82,9 @@ public class ItemGrid : MonoBehaviour
 
     public void PlaceItem(InventoryItem ItemToPlace, int posX, int posY)
     {
+        Debug.Log("PlaceItem");
         RectTransform ItemToPlaceRect = ItemToPlace.GetComponent<RectTransform>();
-        ItemToPlaceRect.SetParent(GridRectTransform);
+        ItemToPlaceRect.SetParent(GridRectTransform, false);
         InventoryItemSlot[posX, posY] = ItemToPlace;
 
         Vector2 position = new Vector2();
@@ -94,6 +99,7 @@ public class ItemGrid : MonoBehaviour
 
     public InventoryItem PickUpItem(int x, int y)
     {
+        Debug.Log("PickUpItem");
         InventoryItem ToReturn = InventoryItemSlot[x, y];
         InventoryItemSlot[x, y] = null;
         return ToReturn;
