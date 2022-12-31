@@ -20,10 +20,16 @@ public class GridInteract
 
     [SerializeField]
     TextMeshProUGUI DebugText;
+    ItemGrid ItemGridInstance;
 
-    private void Awake() { }
+    private void Awake()
+    {
+        ItemGridInstance = GetComponent<ItemGrid>();
+    }
 
     public void OnPointerEnter(PointerEventData eventData) { }
+
+    public void OnPointerUp(PointerEventData eventData) { }
 
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -31,14 +37,12 @@ public class GridInteract
         Debug.Log("OnPointerExit");
     }
 
-    public void OnPointerUp(PointerEventData eventData) { }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("OnPointerDown");
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            InventoryManagerInstanceToChange.SelectedItemGrid = SelectedItemGridBackup;
+            InventoryManagerInstanceToChange.SelectedItemGrid = ItemGridInstance;
             Debug.Log("Clicked on the UI. Not Null");
         }
     }

@@ -14,10 +14,10 @@ public class ItemGrid : MonoBehaviour
     RectTransform InventoryCanvasRect;
 
     float ReferancePixelPerUnit = 100;
-    float TileWidthOnNativeCanvas;
-    float TileHeightOnNativeCanvas;
-    float TileWidthOnGridCanvas;
-    float TileHeightOnGridCanvas;
+    float TileWidthOnNativeCanvas,
+        TileHeightOnNativeCanvas,
+        TileWidthOnGridCanvas,
+        TileHeightOnGridCanvas;
 
     float VerticalScaleCoefficient;
 
@@ -45,7 +45,7 @@ public class ItemGrid : MonoBehaviour
         //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
         InventoryItemSlot = new InventoryItem[8, 4];
         InventoryItem ItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
-        PlaceItem(ItemInstance, 1, 1);
+        PlaceItem(ItemInstance, 4, 3);
     }
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
@@ -90,5 +90,12 @@ public class ItemGrid : MonoBehaviour
         ItemToPlaceRect.localPosition = position;
 
         // at the video he usses top left as anchor I use bottom left
+    }
+
+    public InventoryItem PickUpItem(int x, int y)
+    {
+        InventoryItem ToReturn = InventoryItemSlot[x, y];
+        InventoryItemSlot[x, y] = null;
+        return ToReturn;
     }
 }
