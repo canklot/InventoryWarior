@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemGrid : MonoBehaviour
+public class GridScript : MonoBehaviour
 {
     // I dont like the name of this script
     // This script calculates on what grid coordinates the mouse is

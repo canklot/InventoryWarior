@@ -4,34 +4,46 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    [HideInInspector]
-    public ItemGrid SelectedItemGrid;
+    [SerializeField]
+    GridScript GridInstance;
+
+    GridInteract GridInteractInstance;
 
     InventoryItem SelectedItem;
     RectTransform SelectedItemRect;
+    Vector2Int TileGridPosition;
+
+    void Awake()
+    {
+        GridInteractInstance = GridInstance.GetComponent<GridInteract>();
+    }
 
     void Update()
     {
-        DragItemIcon();
-
-        if (SelectedItemGrid == null)
+        if (Input.touchCount > 0)
         {
-            return;
+            Touch touch = Input.GetTouch(0);
+            TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if (GridInteractInstance.PointerOverGrid == true)
+                    {
+                        Debug.Log("TouchPhase.Began");
+                        PickUpItemCompound(TileGridPosition);
+                    }
+                    break;
+                case TouchPhase.Moved:
+                    Debug.Log("TouchPhase.Moved");
+                    DragItemIcon();
+                    break;
+                case TouchPhase.Ended:
+                    Debug.Log("TouchPhase.Ended");
+                    PlaceItemCompound(TileGridPosition);
+                    break;
+            }
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            Vector2Int TileGridPosition = SelectedItemGrid.GetTileGridPosition(Input.mousePosition);
-
-            if (SelectedItem == null)
-            {
-                PickUpItemCompound(TileGridPosition);
-            }
-            else
-            {
-                PlaceItemCompound(TileGridPosition);
-            }
-        }
         //Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
     }
 
@@ -45,16 +57,22 @@ public class InventoryManager : MonoBehaviour
 
     void PlaceItemCompound(Vector2Int TileGridPosition)
     {
-        SelectedItemGrid.PlaceItem(SelectedItem, TileGridPosition.x, TileGridPosition.y);
-        SelectedItem = null;
+        if (SelectedItem != null)
+        {
+            GridInstance.PlaceItem(SelectedItem, TileGridPosition.x, TileGridPosition.y);
+            SelectedItem = null;
+        }
     }
 
     void PickUpItemCompound(Vector2Int TileGridPosition)
     {
-        SelectedItem = SelectedItemGrid.PickUpItem(TileGridPosition.x, TileGridPosition.y);
-        if (SelectedItem != null)
+        if (SelectedItem == null)
         {
-            SelectedItemRect = SelectedItem.GetComponent<RectTransform>();
+            SelectedItem = GridInstance.PickUpItem(TileGridPosition.x, TileGridPosition.y);
+            if (SelectedItem != null)
+            {
+                SelectedItemRect = SelectedItem.GetComponent<RectTransform>();
+            }
         }
     }
 }

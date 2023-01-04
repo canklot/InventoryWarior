@@ -1508,9 +1508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6068c31cf0a81864293a5a4a2b5c8297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManagerInstance: {fileID: 1833680672}
-  SelectedItemGridBackup: {fileID: 293854577}
-  DebugText: {fileID: 1178676911}
 --- !u!114 &293854579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2613,7 +2610,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   fill: {fileID: 1692412123}
-  maxHp: 500
+  maxHp: 900
   currentHp: 0
 --- !u!114 &1218591371
 MonoBehaviour:
@@ -4794,7 +4791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1743300289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5022,7 +5019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe33fbe902d0d942ab08ab173a96ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedItemGrid: {fileID: 293854577}
+  GridInstance: {fileID: 293854577}
 --- !u!1001 &2004663855
 PrefabInstance:
   m_ObjectHideFlags: 0

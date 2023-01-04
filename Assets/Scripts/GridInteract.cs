@@ -4,49 +4,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-[RequireComponent(typeof(ItemGrid))]
-public class GridInteract
-    : MonoBehaviour,
-        IPointerEnterHandler,
-        IPointerExitHandler,
-        IPointerUpHandler,
-        IPointerDownHandler
+public class GridInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField]
-    InventoryManager InventoryManagerInstance;
+    public bool PointerOverGrid { get; private set; }
 
-    [SerializeField]
-    ItemGrid SelectedItemGridBackup;
-
-    [SerializeField]
-    TextMeshProUGUI DebugText;
-    ItemGrid ItemGridInstance;
-
-    private void Awake()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        ItemGridInstance = GetComponent<ItemGrid>();
+        PointerOverGrid = true;
     }
-
-    public void OnPointerEnter(PointerEventData eventData) { }
-
-    public void OnPointerUp(PointerEventData eventData) { }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        InventoryManagerInstance.SelectedItemGrid = null;
-        Debug.Log("OnPointerExit");
+        PointerOverGrid = false;
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void AccessTest()
     {
-        Debug.Log("OnPointerDown");
-
-        InventoryManagerInstance.SelectedItemGrid = ItemGridInstance;
+        Debug.Log("AccessTest");
     }
-
-    // There is some problems witch touch input
-
-    void Start() { }
-
-    void Update() { }
 }
