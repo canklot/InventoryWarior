@@ -16,9 +16,9 @@ public class GridScript : MonoBehaviour
 
     float ReferancePixelPerUnit = 100;
     float TileWidthOnNativeCanvas,
-        TileHeightOnNativeCanvas,
-        TileWidthOnGridCanvas,
-        TileHeightOnGridCanvas;
+        TileHeightOnNativeCanvas;
+    public float TileWidthOnGridCanvas { get; private set; }
+    public float TileHeightOnGridCanvas { get; private set; }
 
     float VerticalScaleCoefficient;
 
@@ -85,8 +85,8 @@ public class GridScript : MonoBehaviour
 
         Vector2 position = new Vector2();
         // Add half of the tile to center item
-        position.x = posX * TileWidthOnGridCanvas + TileWidthOnGridCanvas / 2;
-        position.y = posY * TileHeightOnGridCanvas + TileHeightOnGridCanvas / 2;
+        position.x = posX * TileWidthOnGridCanvas;
+        position.y = posY * TileHeightOnGridCanvas;
 
         ItemToPlaceRect.localPosition = position;
 
