@@ -62,7 +62,10 @@ public class InventoryManager : MonoBehaviour
     {
         if (SelectedItem != null)
         {
-            SelectedItemRect.position = Input.mousePosition;
+            SelectedItemRect.position = new Vector2(
+                Input.mousePosition.x - SelectedItemRect.rect.width / 2,
+                Input.mousePosition.y - SelectedItemRect.rect.height / 2
+            );
         }
     }
 

@@ -81,7 +81,15 @@ public class GridScript : MonoBehaviour
         Debug.Log("PlaceItem");
         RectTransform ItemToPlaceRect = ItemToPlace.GetComponent<RectTransform>();
         ItemToPlaceRect.SetParent(GridRectTransform, false);
-        InventoryItemSlot[posX, posY] = ItemToPlace;
+
+        for (int x = 0; x < ItemToPlace.ItemDataInstance.Width; x++)
+        {
+            for (int y = 0; y < ItemToPlace.ItemDataInstance.Height; y++)
+            {
+                InventoryItemSlot[posX + x, posY + y] = ItemToPlace;
+            }
+        }
+        ItemToPlace.OnGridPosition = new Vector2Int(posX, posY);
 
         Vector2 position = new Vector2();
         // Add half of the tile to center item
@@ -95,9 +103,21 @@ public class GridScript : MonoBehaviour
 
     public InventoryItem PickUpItem(int x, int y)
     {
-        Debug.Log("PickUpItem");
         InventoryItem ToReturn = InventoryItemSlot[x, y];
-        InventoryItemSlot[x, y] = null;
+        if (ToReturn == null)
+        {
+            return null;
+        }
+        for (int ix = 0; ix < ToReturn.ItemDataInstance.Width; ix++)
+        {
+            for (int iy = 0; iy < ToReturn.ItemDataInstance.Height; iy++)
+            {
+                InventoryItemSlot[ToReturn.OnGridPosition.x + ix, ToReturn.OnGridPosition.y + iy] =
+                    null;
+            }
+        }
+        Debug.Log("PickUpItem");
+
         return ToReturn;
     }
 }
