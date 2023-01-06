@@ -46,10 +46,6 @@ public class GridScript : MonoBehaviour
         //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
 
         InventoryItemSlot = new InventoryItem[8, 4];
-        InventoryItem ItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
-        PlaceItem(ItemInstance, 2, 2);
-        ItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
-        PlaceItem(ItemInstance, 1, 1);
     }
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)

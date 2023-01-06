@@ -13,6 +13,15 @@ public class InventoryManager : MonoBehaviour
     RectTransform SelectedItemRect;
     Vector2Int TileGridPosition;
 
+    [SerializeField]
+    List<ItemData> Itemlist;
+
+    [SerializeField]
+    GameObject InventoryItemPrefab;
+
+    [SerializeField]
+    RectTransform GridRect;
+
     void Awake()
     {
         GridInteractInstance = GridInstance.GetComponent<GridInteract>();
@@ -22,29 +31,31 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    if (GridInteractInstance.PointerOverGrid == true)
-                    {
-                        Debug.Log("TouchPhase.Began");
-                        PickUpItemCompound(TileGridPosition);
-                    }
-                    break;
-                case TouchPhase.Moved:
-                    Debug.Log("TouchPhase.Moved");
-                    DragItemIcon();
-                    break;
-                case TouchPhase.Ended:
-                    Debug.Log("TouchPhase.Ended");
-                    PlaceItemCompound(TileGridPosition);
-                    break;
-            }
+            TouchControls();
         }
 
         //Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
+    }
+
+    private void TouchControls()
+    {
+        Touch touch = Input.GetTouch(0);
+        TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:
+                if (GridInteractInstance.PointerOverGrid == true)
+                {
+                    PickUpItemCompound(TileGridPosition);
+                }
+                break;
+            case TouchPhase.Moved:
+                DragItemIcon();
+                break;
+            case TouchPhase.Ended:
+                PlaceItemCompound(TileGridPosition);
+                break;
+        }
     }
 
     void DragItemIcon()
@@ -74,5 +85,16 @@ public class InventoryManager : MonoBehaviour
                 SelectedItemRect = SelectedItem.GetComponent<RectTransform>();
             }
         }
+    }
+
+    public void CreateRandomItem()
+    {
+        InventoryItem inventoryItemInstance = Instantiate(InventoryItemPrefab)
+            .GetComponent<InventoryItem>();
+        RectTransform InventoryItemRect = inventoryItemInstance.GetComponent<RectTransform>();
+        SelectedItem = inventoryItemInstance;
+        InventoryItemRect.SetParent(GridRect, false);
+        int SelectedItemID = Random.Range(0, Itemlist.Count);
+        inventoryItemInstance.Set(Itemlist[SelectedItemID]);
     }
 }
