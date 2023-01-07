@@ -20,7 +20,7 @@ public class GridScript : MonoBehaviour
     public float TileWidthOnGridCanvas { get; private set; }
     public float TileHeightOnGridCanvas { get; private set; }
 
-    float VerticalScaleCoefficient;
+    public float VerticalScaleCoefficient { get; private set; }
 
     Vector2 GridCoordinates = new Vector2();
     Vector2Int TileCoordinates = new Vector2Int();

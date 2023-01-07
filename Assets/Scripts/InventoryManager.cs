@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     [SerializeField]
     GridScript GridInstance;
@@ -29,42 +30,19 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            TouchControls();
-        }
-
         //Debug.Log("tile position " + SelectedItemGrid.GetTileGridPosition(Input.mousePosition));
-    }
-
-    private void TouchControls()
-    {
-        Touch touch = Input.GetTouch(0);
-        TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
-        switch (touch.phase)
-        {
-            case TouchPhase.Began:
-                if (GridInteractInstance.PointerOverGrid == true)
-                {
-                    PickUpItemCompound(TileGridPosition);
-                }
-                break;
-            case TouchPhase.Moved:
-                DragItemIcon();
-                break;
-            case TouchPhase.Ended:
-                PlaceItemCompound(TileGridPosition);
-                break;
-        }
     }
 
     void DragItemIcon()
     {
         if (SelectedItem != null)
         {
+            Debug.Log(SelectedItemRect.rect.width);
             SelectedItemRect.position = new Vector2(
-                Input.mousePosition.x - SelectedItemRect.rect.width / 2,
-                Input.mousePosition.y - SelectedItemRect.rect.height / 2
+                Input.mousePosition.x
+                    - (SelectedItemRect.rect.width * 0.25f * GridInstance.VerticalScaleCoefficient),
+                Input.mousePosition.y
+                    - (SelectedItemRect.rect.height * 0.25f * GridInstance.VerticalScaleCoefficient)
             );
         }
     }
@@ -99,5 +77,28 @@ public class InventoryManager : MonoBehaviour
         InventoryItemRect.SetParent(GridRect, false);
         int SelectedItemID = Random.Range(0, Itemlist.Count);
         inventoryItemInstance.Set(Itemlist[SelectedItemID]);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log(name + "Game Object Click in Progress");
+        if (GridInteractInstance.PointerOverGrid == true)
+        {
+            TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
+            PickUpItemCompound(TileGridPosition);
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        Debug.Log(name + "OnDrag");
+        DragItemIcon();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log(name + "OnPointerUp");
+        TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
+        PlaceItemCompound(TileGridPosition);
     }
 }
