@@ -13,8 +13,11 @@ public class GridScript : MonoBehaviour
     [SerializeField]
     Canvas InventoryCanvas;
     RectTransform InventoryCanvasRect;
+    CanvasScaler InventoryCanvasScaler;
 
-    float ReferancePixelPerUnit = 100;
+    float ReferancePixelPerUnit;
+    int TileCountX,
+        TileCountY;
     float TileWidthOnNativeCanvas,
         TileHeightOnNativeCanvas;
     public float TileWidthOnGridCanvas { get; private set; }
@@ -31,21 +34,26 @@ public class GridScript : MonoBehaviour
     [SerializeField]
     InventoryItem InventoryItemPrefab;
 
-    private void Start()
+    private void Awake()
     {
-        TileWidthOnGridCanvas = ReferancePixelPerUnit;
-        TileHeightOnGridCanvas = ReferancePixelPerUnit;
-        // Looks like based on what canvas you are and if its fixed size or scales coordinates and size can change between canvas
+        InventoryCanvasScaler = InventoryCanvas.GetComponent<CanvasScaler>();
         GridRectTransform = GetComponent<RectTransform>();
         InventoryCanvasRect = InventoryCanvas.GetComponent<RectTransform>();
-        // need better name TileSizeWidth. For what canvas it is
+    }
+
+    private void Start()
+    {
+        ReferancePixelPerUnit = InventoryCanvasScaler.referencePixelsPerUnit;
+        TileWidthOnGridCanvas = ReferancePixelPerUnit;
+        TileHeightOnGridCanvas = ReferancePixelPerUnit;
+
         VerticalScaleCoefficient = Screen.width / InventoryCanvasRect.rect.width;
         TileWidthOnNativeCanvas = VerticalScaleCoefficient * ReferancePixelPerUnit;
         // When set to fit width, height and with are the same
         TileHeightOnNativeCanvas = TileWidthOnNativeCanvas;
-        //Debug.Log("tile width " + TileSizeWidth + " tile height " + TileSizeHeight);
-
-        InventoryItemSlot = new InventoryItem[8, 4];
+        TileCountX = (int)(InventoryCanvasScaler.referenceResolution.x / ReferancePixelPerUnit);
+        TileCountY = (int)(GridRectTransform.rect.height / ReferancePixelPerUnit);
+        InventoryItemSlot = new InventoryItem[TileCountX, TileCountY];
     }
 
     public Vector2Int GetTileGridPosition(Vector2 MousePosition)
@@ -76,9 +84,13 @@ public class GridScript : MonoBehaviour
         GridRectTransform.sizeDelta = new Vector2(1, ResizeHeight);
     }
 
-    public void PlaceItem(InventoryItem ItemToPlace, int posX, int posY)
+    public bool PlaceItem(InventoryItem ItemToPlace, int posX, int posY)
     {
         Debug.Log("PlaceItem");
+        if (BoundryCheck(posX, posY, ItemToPlace.ItemDataInstance.Width, ItemToPlace.ItemDataInstance.Height) == false)
+        {
+            return false;
+        }
         RectTransform ItemToPlaceRect = ItemToPlace.GetComponent<RectTransform>();
         ItemToPlaceRect.SetParent(GridRectTransform, false);
 
@@ -99,6 +111,8 @@ public class GridScript : MonoBehaviour
         ItemToPlaceRect.localPosition = position;
 
         // at the video he usses top left as anchor I use bottom left
+
+        return true;
     }
 
     public InventoryItem PickUpItem(int x, int y)
@@ -112,12 +126,38 @@ public class GridScript : MonoBehaviour
         {
             for (int iy = 0; iy < ToReturn.ItemDataInstance.Height; iy++)
             {
-                InventoryItemSlot[ToReturn.OnGridPosition.x + ix, ToReturn.OnGridPosition.y + iy] =
-                    null;
+                InventoryItemSlot[ToReturn.OnGridPosition.x + ix, ToReturn.OnGridPosition.y + iy] = null;
             }
         }
         Debug.Log("PickUpItem");
 
         return ToReturn;
+    }
+
+    bool PositionCheck(int posX, int posY)
+    {
+        if (posX < 0 || posY < 0)
+        {
+            return false;
+        }
+        if (posX >= TileCountX || posY >= TileCountY)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    bool BoundryCheck(int posX, int posY, int width, int height)
+    {
+        if (PositionCheck(posX, posY) == false)
+        { // Check if mouse below grid coordinates
+            return false;
+        }
+
+        if (PositionCheck(posX + width - 1, posY + height - 1) == false)
+        { // Substract 1 because coordinates start from 0 but size starts from 1
+            return false;
+        }
+        return true;
     }
 }

@@ -23,6 +23,8 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     [SerializeField]
     RectTransform GridRect;
 
+    Vector3 OldPosition;
+
     void Awake()
     {
         GridInteractInstance = GridInstance.GetComponent<GridInteract>();
@@ -37,12 +39,9 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         if (SelectedItem != null)
         {
-            Debug.Log(SelectedItemRect.rect.width);
             SelectedItemRect.position = new Vector2(
-                Input.mousePosition.x
-                    - (SelectedItemRect.rect.width * 0.25f * GridInstance.VerticalScaleCoefficient),
-                Input.mousePosition.y
-                    - (SelectedItemRect.rect.height * 0.25f * GridInstance.VerticalScaleCoefficient)
+                Input.mousePosition.x - (SelectedItemRect.rect.width * 0.25f * GridInstance.VerticalScaleCoefficient),
+                Input.mousePosition.y - (SelectedItemRect.rect.height * 0.25f * GridInstance.VerticalScaleCoefficient)
             );
         }
     }
@@ -51,8 +50,15 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         if (SelectedItem != null)
         {
-            GridInstance.PlaceItem(SelectedItem, TileGridPosition.x, TileGridPosition.y);
-            SelectedItem = null;
+            bool PlaceSuccess = GridInstance.PlaceItem(SelectedItem, TileGridPosition.x, TileGridPosition.y);
+            if (PlaceSuccess)
+            {
+                SelectedItem = null;
+            }
+            else
+            {
+                SelectedItemRect.position = OldPosition;
+            }
         }
     }
 
@@ -64,14 +70,14 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             if (SelectedItem != null)
             {
                 SelectedItemRect = SelectedItem.GetComponent<RectTransform>();
+                OldPosition = SelectedItemRect.position;
             }
         }
     }
 
     public void CreateRandomItem()
     {
-        InventoryItem inventoryItemInstance = Instantiate(InventoryItemPrefab)
-            .GetComponent<InventoryItem>();
+        InventoryItem inventoryItemInstance = Instantiate(InventoryItemPrefab).GetComponent<InventoryItem>();
         RectTransform InventoryItemRect = inventoryItemInstance.GetComponent<RectTransform>();
         SelectedItem = inventoryItemInstance;
         InventoryItemRect.SetParent(GridRect, false);
@@ -81,7 +87,6 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log(name + "Game Object Click in Progress");
         if (GridInteractInstance.PointerOverGrid == true)
         {
             TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
@@ -91,13 +96,11 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(name + "OnDrag");
         DragItemIcon();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log(name + "OnPointerUp");
         TileGridPosition = GridInstance.GetTileGridPosition(Input.mousePosition);
         PlaceItemCompound(TileGridPosition);
     }
