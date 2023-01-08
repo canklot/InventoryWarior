@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     Vector2Int TileGridPosition;
 
     [SerializeField]
-    List<ItemData> Itemlist;
+    List<ItemDataClass> Itemlist;
 
     [SerializeField]
     GameObject InventoryItemPrefab;

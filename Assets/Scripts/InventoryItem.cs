@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    public ItemData ItemDataInstance { get; private set; }
+    public ItemDataClass ItemData { get; private set; }
     public Vector2Int OnGridPosition { get; set; }
 
     GridScript InventoryGrid;
 
-    internal void Set(ItemData ItemDataParam)
+    internal void Set(ItemDataClass ItemDataParam)
     {
-        ItemDataInstance = ItemDataParam;
+        ItemData = ItemDataParam;
         GetComponent<Image>().sprite = ItemDataParam.ItemIcon;
 
         Vector2 size = new Vector2();

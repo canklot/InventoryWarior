@@ -87,16 +87,16 @@ public class GridScript : MonoBehaviour
     public bool PlaceItem(InventoryItem ItemToPlace, int posX, int posY)
     {
         Debug.Log("PlaceItem");
-        if (BoundryCheck(posX, posY, ItemToPlace.ItemDataInstance.Width, ItemToPlace.ItemDataInstance.Height) == false)
+        if (BoundryCheck(posX, posY, ItemToPlace.ItemData.Width, ItemToPlace.ItemData.Height) == false)
         {
             return false;
         }
         RectTransform ItemToPlaceRect = ItemToPlace.GetComponent<RectTransform>();
         ItemToPlaceRect.SetParent(GridRectTransform, false);
 
-        for (int x = 0; x < ItemToPlace.ItemDataInstance.Width; x++)
+        for (int x = 0; x < ItemToPlace.ItemData.Width; x++)
         {
-            for (int y = 0; y < ItemToPlace.ItemDataInstance.Height; y++)
+            for (int y = 0; y < ItemToPlace.ItemData.Height; y++)
             {
                 InventoryItemSlot[posX + x, posY + y] = ItemToPlace;
             }
@@ -122,9 +122,9 @@ public class GridScript : MonoBehaviour
         {
             return null;
         }
-        for (int ix = 0; ix < ToReturn.ItemDataInstance.Width; ix++)
+        for (int ix = 0; ix < ToReturn.ItemData.Width; ix++)
         {
-            for (int iy = 0; iy < ToReturn.ItemDataInstance.Height; iy++)
+            for (int iy = 0; iy < ToReturn.ItemData.Height; iy++)
             {
                 InventoryItemSlot[ToReturn.OnGridPosition.x + ix, ToReturn.OnGridPosition.y + iy] = null;
             }
