@@ -91,6 +91,10 @@ public class GridScript : MonoBehaviour
         {
             return false;
         }
+        if (OverlapCheck(posX, posY, ItemToPlace.ItemData) == false)
+        {
+            return false;
+        }
         RectTransform ItemToPlaceRect = ItemToPlace.GetComponent<RectTransform>();
         ItemToPlaceRect.SetParent(GridRectTransform, false);
 
@@ -109,9 +113,7 @@ public class GridScript : MonoBehaviour
         position.y = posY * TileHeightOnGridCanvas;
 
         ItemToPlaceRect.localPosition = position;
-
         // at the video he usses top left as anchor I use bottom left
-
         return true;
     }
 
@@ -157,6 +159,21 @@ public class GridScript : MonoBehaviour
         if (PositionCheck(posX + width - 1, posY + height - 1) == false)
         { // Substract 1 because coordinates start from 0 but size starts from 1
             return false;
+        }
+        return true;
+    }
+
+    private bool OverlapCheck(int posX, int posY, ItemDataClass ItemToPlace)
+    {
+        for (int x = 0; x < ItemToPlace.Width; x++)
+        {
+            for (int y = 0; y < ItemToPlace.Height; y++)
+            {
+                if (InventoryItemSlot[posX + x, posY + y] != null)
+                {
+                    return false;
+                }
+            }
         }
         return true;
     }
